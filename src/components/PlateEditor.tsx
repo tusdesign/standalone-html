@@ -10,6 +10,8 @@ const PlateEditor: FC<{visible: boolean, value?: string[], onChange?: (value: st
       showCloseButton
       bodyStyle={{ height: '95vh' }}
       onClose={() => onClose && onClose([])}
+
+      
     >
       xxx
     </Popup>

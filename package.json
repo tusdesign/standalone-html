@@ -34,7 +34,8 @@
     "eslint-config-airbnb-typescript": "^17.0.0",
     "eslint-plugin-import": "2.25.2",
     "html-inline-css-webpack-plugin": "^1.11.1",
-    "react-app-rewired": "^2.2.1"
+    "react-app-rewired": "^2.2.1",
+    "uglifyjs-webpack-plugin": "^2.2.0"
   },
   "browserslist": {
     "production": [

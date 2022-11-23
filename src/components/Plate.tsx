@@ -1,9 +1,11 @@
 import {
-  Button, Grid, Input, Picker,
+  Button, Grid, Input, Picker, Toast,
 } from 'antd-mobile';
 import { EditSOutline, DeleteOutline, CheckOutline } from 'antd-mobile-icons';
 import { PickerValue } from 'antd-mobile/es/components/picker-view';
-import React, { FC, useCallback, useState } from 'react';
+import React, {
+  FC, useCallback, useState,
+} from 'react';
 
 export const LICENSE_PLATE_PATTERN = /^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼]{1}[A-HJ-NP-Z]{1}(([A-HJ-NP-Z0-9]{5})|([0-9]{6}|[A-HJ-NP-Z]{1}[0-9]{5}|[0-9]{5}[A-HJ-NP-Z]{1}|[A-HJ-NP-Z]{2}[0-9]{4}))$/;
 
@@ -62,6 +64,10 @@ LicensePlateProps & {
   const confirmPlate = useCallback(() => {
     if (checkPlateNumberFormat(`${localRegion}${localCode}`)) {
       onConfirm({ region: localRegion, code: localCode });
+    } else {
+      Toast.show({
+        content: '车牌号格式不正确',
+      });
     }
   }, [localCode, localRegion, onConfirm]);
   const [isShowPicker, setIsShowPicker] = useState(false);
@@ -86,7 +92,7 @@ LicensePlateProps & {
         <Picker visible={isShowPicker} columns={[REGION_OPTIONS]} value={[localRegion]} onConfirm={updateRegion} onClose={hidePicker}/>
       </Grid.Item>
       <Grid.Item span={4} style={{ display: 'flex', alignItems: 'center' }}>
-        <Input placeholder='请输入' value={localCode} onChange={updateCode} maxLength={7}/>
+        <Input placeholder='请输入' value={localCode} pattern="[A-Z0-9]{6,7}" onChange={updateCode} maxLength={7}/>
       </Grid.Item>
       <Grid.Item span={2}>
         <Button onClick={confirmPlate}>

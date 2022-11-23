@@ -1,7 +1,7 @@
 import {
   Button, Grid, Input, Picker,
 } from 'antd-mobile';
-import { CheckCircleOutline, EditSOutline } from 'antd-mobile-icons';
+import { EditSOutline, DeleteOutline, CheckOutline } from 'antd-mobile-icons';
 import { PickerValue } from 'antd-mobile/es/components/picker-view';
 import React, { FC, useCallback, useState } from 'react';
 
@@ -52,8 +52,11 @@ function checkPlateNumberFormat(plateNo: string) {
 const EditingPlate: FC<
 LicensePlateProps & {
   onConfirm: (newPlate: LicensePlateProps) => void;
+  onDelete: () => void
 }
-> = ({ code, region, onConfirm }) => {
+> = ({
+  code, region, onConfirm, onDelete,
+}) => {
   const [localRegion, setLocalRegion] = useState(region || REGION_OPTIONS[0]);
   const [localCode, setLocalCode] = useState(code || '');
   const confirmPlate = useCallback(() => {
@@ -73,21 +76,26 @@ LicensePlateProps & {
     hidePicker();
   }, []);
   const updateCode = useCallback((newCode: string) => {
-    setLocalCode(newCode.replace('s', '').trim());
+    setLocalCode(newCode.replace('s', '').trim().toUpperCase());
   }, []);
   return (
-    <Grid columns={10} gap={2}>
+    <Grid columns={12} gap={2}>
       <Grid.Item span={1}></Grid.Item>
       <Grid.Item span={2} >
         <Button onClick={showPicker}>{localRegion}</Button>
         <Picker visible={isShowPicker} columns={[REGION_OPTIONS]} value={[localRegion]} onConfirm={updateRegion} onClose={hidePicker}/>
       </Grid.Item>
-      <Grid.Item span={4}>
-        <Input placeholder='请输入' value={localCode} onChange={updateCode}/>
+      <Grid.Item span={4} style={{ display: 'flex', alignItems: 'center' }}>
+        <Input placeholder='请输入' value={localCode} onChange={updateCode} maxLength={7}/>
       </Grid.Item>
       <Grid.Item span={2}>
         <Button onClick={confirmPlate}>
-          <CheckCircleOutline />
+          <CheckOutline />
+        </Button>
+      </Grid.Item>
+      <Grid.Item span={2}>
+        <Button onClick={onDelete}>
+          <DeleteOutline/>
         </Button>
       </Grid.Item>
       <Grid.Item span={1}></Grid.Item>
@@ -97,18 +105,26 @@ LicensePlateProps & {
 
 // 展示状态
 const DisplayLicensePlate: FC<
-LicensePlateProps & { onPressEdit: () => void; allowEdit: boolean }
+LicensePlateProps & {
+  onPressEdit: () => void;
+  allowEdit: boolean;
+  onDelete: () => void;
+
+}
 > = ({
-  allowEdit = true, onPressEdit, code, region,
+  allowEdit = true, onPressEdit, onDelete, code, region,
 }) => {
   const charList = [region, code.toUpperCase()?.split('')].flat(Infinity);
   return (
-    <Grid columns={charList.length} gap={2}>
+    <Grid columns={charList.length + 2} gap={2}>
       {charList.map((_c, index) => (
         <Button key={`${_c}${index}`}>{_c}</Button>
       ))}
       <Button disabled={!allowEdit} onClick={onPressEdit}>
         <EditSOutline/>
+      </Button>
+      <Button onClick={onDelete}>
+        <DeleteOutline/>
       </Button>
     </Grid>
   );
@@ -118,13 +134,14 @@ export const LicensePlate: FC<
 LicensePlateProps & {
   onConfirm: (newPlate: LicensePlateProps) => void;
   onEdit: () => void;
+  onDelete: () => void;
   mode: MODE;
   allowEdit: boolean;
 }
 > = ({
-  mode = MODE.display, code, region, allowEdit, onEdit, onConfirm,
+  mode = MODE.display, code, region, allowEdit, onEdit, onConfirm, onDelete,
 }) => (mode === MODE.edit ? (
-    <EditingPlate code={code} region={region} onConfirm={onConfirm} />
+    <EditingPlate code={code} region={region} onConfirm={onConfirm} onDelete={onDelete} />
 ) : (
-    <DisplayLicensePlate onPressEdit={onEdit} code={code} region={region} allowEdit={allowEdit} />
+    <DisplayLicensePlate onPressEdit={onEdit} code={code} region={region} allowEdit={allowEdit} onDelete={onDelete} />
 ));

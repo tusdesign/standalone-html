@@ -11,7 +11,6 @@ interface RequestData {
   visitor_mobile: string;
   visitee: string;
   visitee_mobile: string;
-  visitee_company: string;
   startTime: string;
   duration: string[]
 }
@@ -26,6 +25,7 @@ function App() {
   const [plates, setPlates] = useState<LicensePlateItem[]>();
   const updatePlates = useCallback((newPlates: LicensePlateItem[]) => {
     setPlates(newPlates);
+    form.setFieldValue('plates', newPlates.map((_p) => `${_p.region}${_p.code}`));
   }, []);
   const showPlateEditor = useCallback(() => {
     setIsShowPlateEditor(true);
@@ -35,7 +35,7 @@ function App() {
   }, []);
   return (
     <>
-      <PlateEditor visible={isShowPlateEditor} onClose={closePlateEditor} onChange={updatePlates} />
+      <PlateEditor visible={isShowPlateEditor} onClose={closePlateEditor} onChange={updatePlates}/>
       <Form layout='horizontal' mode='card' form={form}
         onFinish={submit}
         onFinishFailed = {onError}
@@ -49,21 +49,22 @@ function App() {
         <Form.Item label="访客姓名" name="visitor" rules={[{ required: true }]}>
           <Input placeholder='请输入' />
         </Form.Item>
-        <Form.Item label="访客手机号" name="visitor_mobile" rules={[{ required: true }]}>
-          <Input placeholder='请输入' />
+        <Form.Item label="访客手机号" name="visitor_mobile" rules={[{ required: true }, { pattern: /^1[3456789]\d{9}$/, message: '手机号格式不正确' }]}>
+          <Input placeholder='请输入' maxLength={11} type="tel"/>
         </Form.Item>
         <Form.Item label="来访车牌号" name="plates">
-          <Button onClick={showPlateEditor}>添加车牌</Button>
+          <Button onClick={showPlateEditor}>
+            {
+              plates?.length ? '编辑车牌号' : '添加车牌'
+            }
+          </Button>
         </Form.Item>
         <Form.Header>被访人信息</Form.Header>
         <Form.Item label="被访人姓名" name="visitee" rules={[{ required: true }]}>
           <Input placeholder='请输入' />
         </Form.Item>
-        <Form.Item label="被访人公司" name="visitee_company" rules={[{ required: true }]}>
-          <Input placeholder='请输入' />
-        </Form.Item>
-        <Form.Item label="被访人手机号" name="visitee_mobile" rules={[{ required: true }]}>
-          <Input placeholder='请输入' />
+        <Form.Item label="被访人手机号" name="visitee_mobile" rules={[{ required: true }, { pattern: /^1[3456789]\d{9}$/, message: '手机号格式不正确' }]}>
+          <Input placeholder='请输入' maxLength={11} type="tel"/>
         </Form.Item>
         <Form.Header>来访时间信息</Form.Header>
         <Form.Item label="到访时间"

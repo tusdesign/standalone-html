@@ -5,15 +5,17 @@ module.exports = {
     sourceType: 'module',
     project: './tsconfig.json'
   },
-  plugins: ['@typescript-eslint/eslint-plugin'],
+  plugins: [
+    '@typescript-eslint/eslint-plugin',
+  ],
   extends: [
     'airbnb-base',
     'airbnb-typescript',
-    "plugin:import/recommended"
+    "plugin:import/recommended",
   ],
   rules: {
     'import/prefer-default-export': 0,
     'max-len': 0,
-    "react/jsx-filename-extension": ["error", { "extensions": [".js", ".jsx", ".ts", ".tsx"] }]
+    "react/jsx-filename-extension": "off"
   }
 };

@@ -2,6 +2,7 @@
   "name": "single-app-ts",
   "version": "0.1.0",
   "private": true,
+  "homepage": "./",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -12,6 +13,7 @@
     "@types/react-dom": "^18.0.9",
     "antd-mobile": "^5.25.1",
     "antd-mobile-icons": "^0.3.0",
+    "axios": "^1.2.0",
     "dayjs": "^1.11.6",
     "nanoid": "^4.0.0",
     "react": "^18.2.0",
@@ -24,6 +26,7 @@
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
+    "deploy": "gh-pages -d build",
     "eject": "react-scripts eject"
   },
   "devDependencies": {
@@ -33,7 +36,10 @@
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-config-airbnb-typescript": "^17.0.0",
     "eslint-plugin-import": "2.25.2",
-    "react-app-rewired": "^2.2.1"
+    "gh-pages": "^4.0.0",
+    "html-inline-css-webpack-plugin": "^1.11.1",
+    "react-app-rewired": "^2.2.1",
+    "uglifyjs-webpack-plugin": "^2.2.0"
   },
   "browserslist": {
     "production": [

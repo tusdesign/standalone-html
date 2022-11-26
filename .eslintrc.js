@@ -16,6 +16,7 @@ module.exports = {
   rules: {
     'import/prefer-default-export': 0,
     'max-len': 0,
-    "react/jsx-filename-extension": "off"
+    "react/jsx-filename-extension": "off",
+    "@typescript-eslint/naming-convention" : "off"
   }
 };

@@ -12,6 +12,7 @@
     "@types/react-dom": "^18.0.9",
     "antd-mobile": "^5.25.1",
     "antd-mobile-icons": "^0.3.0",
+    "axios": "^1.2.0",
     "dayjs": "^1.11.6",
     "nanoid": "^4.0.0",
     "react": "^18.2.0",

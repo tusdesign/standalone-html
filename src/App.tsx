@@ -19,6 +19,8 @@ interface RequestData {
 
 function App() {
   const [form] = Form.useForm<RequestData>();
+  form.setFieldValue('duration', ['4']);
+  const startOfDate = dayjs().diff(dayjs().startOf('hour')) >= 30 ? dayjs().startOf('hour').add(1, 'hour') : dayjs().startOf('hour').add(30, 'minute');
   const [isShowPlateEditor, setIsShowPlateEditor] = useState(false);
   const [plates, setPlates] = useState<LicensePlateItem[]>();
   const updatePlates = useCallback((newPlates: LicensePlateItem[]) => {
@@ -105,7 +107,7 @@ function App() {
           }
         >
         <DatePicker
-          min={dayjs().toDate()}
+          min={startOfDate.toDate()}
           filter={{
             minute: (val) => (val === 0 || val === 30),
           }}

@@ -3,9 +3,10 @@ import {
 } from 'antd-mobile';
 import React, { RefObject, useCallback, useState } from 'react';
 import dayjs from 'dayjs';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import PlateEditor from './components/PlateEditor';
 import { LicensePlateItem } from './components/Plate';
+import { ERROR_MAP } from './lib/error';
 
 interface RequestData {
   visitor: string;
@@ -44,9 +45,11 @@ function App() {
         content: '预约成功',
         onClose: form.resetFields,
       });
-    }).catch((err) => {
+    }).catch((err: AxiosError) => {
+      const { response } = err;
+      const { data: { code, message } } = response as { data: { code: number, message: string } };
       Dialog.alert({
-        content: err?.response?.data?.error || 'Unknown error',
+        content: ERROR_MAP[String(code)] || message || 'Unknown error',
       });
     });
   }, []);

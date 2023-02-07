@@ -1,14 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App';
+import { HashRouter, Route, Routes } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
+import { VisitorAppointment } from './pages/visitor-appointment';
+import { NotificationPublishPage } from './pages/publish-notification';
+import { VisitorPass } from './pages/visitor-pass';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <HashRouter>
+      <Routes>
+        <Route path='/' element={<VisitorAppointment/>}></Route>
+        <Route path='/notification'>
+          <Route index element={<NotificationPublishPage/>}></Route>
+          <Route path='publisher' element={<NotificationPublishPage/>}></Route>
+        </Route>
+        <Route path='/visitor'>
+          <Route path='passport/:id' element={<VisitorPass/>}></Route>
+        </Route>
+      </Routes>
+    </HashRouter>
   </React.StrictMode>,
 );
 

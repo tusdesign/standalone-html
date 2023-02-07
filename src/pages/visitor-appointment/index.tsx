@@ -1,12 +1,12 @@
 import {
   Form, Input, DatePicker, Button, Picker, DatePickerRef, PickerRef, Dialog,
 } from 'antd-mobile';
-import React, { RefObject, useCallback, useState } from 'react';
+import { RefObject, useCallback, useState } from 'react';
 import dayjs from 'dayjs';
 import axios, { AxiosError } from 'axios';
-import PlateEditor from './components/PlateEditor';
-import { LicensePlateItem } from './components/Plate';
-import { ERROR_MAP } from './lib/error';
+import PlateEditor from '../../components/PlateEditor';
+import { LicensePlateItem } from '../../components/Plate';
+import { ERROR_MAP } from '../../lib/error';
 
 interface RequestData {
   visitor: string;
@@ -18,7 +18,7 @@ interface RequestData {
   plates: string[]
 }
 
-function App() {
+export function VisitorAppointment() {
   const [form] = Form.useForm<RequestData>();
   form.setFieldValue('duration', ['4']);
   const startOfDate = dayjs().diff(dayjs().startOf('hour')) >= 30 ? dayjs().startOf('hour').add(1, 'hour') : dayjs().startOf('hour').add(30, 'minute');
@@ -143,5 +143,3 @@ function App() {
 
   );
 }
-
-export default App;

@@ -4,7 +4,9 @@ import { HashRouter, Route, Routes } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
 import { VisitorAppointment } from './pages/visitor-appointment';
 import { NotificationPublishPage } from './pages/publish-notification';
-import { VisitorPass } from './pages/visitor-pass';
+import { Visitor } from './pages/visitor-pass/visitor';
+import { Passport } from './pages/visitor-pass/passport';
+import { VisitorLayout } from './pages/visitor-pass/layout';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
@@ -13,13 +15,14 @@ root.render(
   <React.StrictMode>
     <HashRouter>
       <Routes>
-        <Route path='/' element={<VisitorAppointment/>}></Route>
         <Route path='/notification'>
-          <Route index element={<NotificationPublishPage/>}></Route>
+          <Route element={<NotificationPublishPage/>}></Route>
           <Route path='publisher' element={<NotificationPublishPage/>}></Route>
         </Route>
-        <Route path='/visitor'>
-          <Route path='passport/:id' element={<VisitorPass/>}></Route>
+        <Route path='/visitor' element={<VisitorLayout/>}>
+          <Route path='appointment' element={<VisitorAppointment/>}></Route>
+          <Route path=':id' element={<Visitor/>}></Route>
+          <Route path=':id/passport' element={<Passport/>}></Route>
         </Route>
       </Routes>
     </HashRouter>

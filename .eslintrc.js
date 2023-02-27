@@ -19,6 +19,6 @@ module.exports = {
     "react/jsx-filename-extension": "off",
     "@typescript-eslint/naming-convention" : "off",
     "no-unused-vars": "off",
-    "@typescript-eslint/no-unused-vars": "warn"
+    "@typescript-eslint/no-unused-vars": "warn",
   }
 };

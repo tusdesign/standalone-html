@@ -2,12 +2,13 @@ import { useParams, useNavigate } from 'react-router-dom';
 import {
   Input, Button, Card, Toast,
 } from 'antd-mobile';
-import { useCallback, useEffect, useState } from 'react';
+import {
+  FC, useCallback, useEffect, useState,
+} from 'react';
 import axios, { AxiosError } from 'axios';
 import dayjs from 'dayjs';
-import { Passport, Visit } from './interfaces';
 
-export const Visitor = () => {
+export const VisitPage: FC = () => {
   const params = useParams();
   const [cellphone, setCellphone] = useState<string>();
   const [visit, setVisit] = useState<Visit>({} as Visit);
@@ -88,10 +89,10 @@ export const Visitor = () => {
           gap: '1rem',
           borderRadius: '0.5rem',
         }}
-        >
-          <div style={{ fontWeight: 'bold' }}>您已预约于</div>
-          <div style={{ fontSize: '1.5rem', color: '#315da8' }}>{dayjs(visit.from).format('YYYY年MM月DD日') ?? '2023年3月23日'}</div>
-          <div style={{ fontWeight: 'bold' }}>访问启迪设计大厦</div>
+      >
+        <div style={{ fontWeight: 'bold' }}>您已预约于</div>
+        <div style={{ fontSize: '1.5rem', color: 'var(--adm-color-primary)' }}>{dayjs(visit.from).format('YYYY年MM月DD日') ?? '2023年3月23日'}</div>
+        <div style={{ fontWeight: 'bold' }}>访问启迪设计大厦</div>
       </Card>
       <Card style={{ width: '100%' }} bodyStyle={{
         width: '100%',
@@ -127,7 +128,7 @@ export const Visitor = () => {
         <Button
           onClick={generatePassport}
           style={{
-            backgroundColor: '#315da8',
+            backgroundColor: 'var(--adm-color-primary)',
             width: '100%',
             padding: '1rem',
             borderRadius: '0.8rem',

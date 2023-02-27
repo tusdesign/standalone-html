@@ -1,8 +1,8 @@
 import { Outlet } from 'react-router-dom';
 import { Card } from 'antd-mobile';
-import mapImg from '../../assets/map.png';
+import mapImg from '../assets/map.png';
 
-export const VisitorLayout = () => (
+export const PassportLayout = () => (
   <div style={{
     display: 'flex', justifyContent: 'flex-start', flexDirection: 'column', alignItems: 'center', padding: '0 0.5rem', paddingBottom: '2rem',
   }}>

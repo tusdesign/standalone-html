@@ -1,12 +1,12 @@
-export interface Visitor {
+declare interface Visitor {
   mobile: string;
   name: string;
-  expire: string;
-  pass_id: number;
-  company: string;
+  expire?: string;
+  pass_id?: number;
+  company?: string;
 }
 
-export declare enum VisitStatus {
+declare enum VisitStatus {
   Draft = 'draft',
   Pending = 'pending',
   Active = 'active',
@@ -14,7 +14,7 @@ export declare enum VisitStatus {
   Expired = 'expired',
 }
 
-export type Visit = {
+declare type Visit = {
   id: number;
   name: string;
   mobile: string;
@@ -32,7 +32,7 @@ export type Visit = {
   visitor_id: number;
 };
 
-export type Passport = {
+declare type Passport = {
   CreatedAt: string;
   DeletedAt: string;
   ID: number;

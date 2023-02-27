@@ -6,7 +6,7 @@ import { useLocation } from 'react-router-dom';
 import QrCode from 'qrcode';
 import html2canvas from 'html2canvas';
 import dayjs from 'dayjs';
-import bgImage from '../../assets/visitor-pass-bg.png';
+import bgImage from '../assets/visitor-pass-bg.png';
 
 export const Passport:FC = () => {
   const location = useLocation();

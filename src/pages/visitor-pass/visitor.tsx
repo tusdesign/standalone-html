@@ -2,11 +2,10 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { Input, Button, Card } from 'antd-mobile';
 import { useCallback, useEffect, useState } from 'react';
 import axios from 'axios';
-import { Visit } from './interfaces';
+import dayjs from 'dayjs';
+import { Passport, Visit } from './interfaces';
 
 export const Visitor = () => {
-  // TODO: implement
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const params = useParams();
   const [cellphone, setCellphone] = useState<string>();
   const [visit, setVisit] = useState<Visit>({} as Visit);
@@ -15,8 +14,18 @@ export const Visitor = () => {
   }, []);
   const navigate = useNavigate();
   const generatePassport = useCallback(() => {
-    navigate('passport', { state: { cellphone } });
-  }, [cellphone]);
+    axios.get<Passport>(
+      `${process.env.REACT_APP_BASE_URL}/visits/${params.id}/pass/${cellphone}`,
+      {
+        headers: {
+          'X-API-KEY': process.env.X_API_KEY,
+        },
+      },
+    ).then((res) => {
+      const { name, to, token } = res.data;
+      navigate('passport', { state: { name, to, token } });
+    });
+  }, [params.id, cellphone]);
 
   useEffect(() => {
     axios.get<Visit>(
@@ -29,7 +38,7 @@ export const Visitor = () => {
     ).then((res) => {
       setVisit(res.data);
     });
-  });
+  }, [params.id]);
   return (
     <>
       <Card
@@ -45,7 +54,7 @@ export const Visitor = () => {
         }}
         >
           <div style={{ fontWeight: 'bold' }}>您已预约于</div>
-          <div style={{ fontSize: '1.5rem', color: '#315da8' }}>{visit.from ?? '2023年3月23日'}</div>
+          <div style={{ fontSize: '1.5rem', color: '#315da8' }}>{dayjs(visit.from).format('YYYY年MM月DD日') ?? '2023年3月23日'}</div>
           <div style={{ fontWeight: 'bold' }}>访问启迪设计大厦</div>
       </Card>
       <Card style={{ width: '100%' }} bodyStyle={{
@@ -70,7 +79,6 @@ export const Visitor = () => {
           boxSizing: 'border-box',
           position: 'relative',
         }}>
-          {/* <div style={{ fontSize: '0.8rem' }}>手机号</div> */}
           <Input style={{
             '--font-size': '0.8rem',
           }}

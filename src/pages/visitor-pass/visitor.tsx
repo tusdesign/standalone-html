@@ -19,9 +19,8 @@ export const Visitor = () => {
   }, [cellphone]);
 
   useEffect(() => {
-    // TODO
     axios.get<Visit>(
-      `${process.env.REACT_APP_GET_VISITOR_URL}/${params.id}`,
+      `${process.env.REACT_APP_BASE_URL}/visits/${params.id}`,
       {
         headers: {
           'X-API-KEY': process.env.X_API_KEY,

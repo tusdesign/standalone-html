@@ -32,7 +32,7 @@ export function VisitorAppointment() {
     const {
       startTime, duration, visitor, visitee, visitor_mobile, visitee_mobile, plates: _p = [],
     } = values;
-    axios.post(process.env.REACT_APP_CREATE_URL!, {
+    axios.post(`${process.env.REACT_APP_BASE_URL}/visits`, {
       name: visitor,
       mobile: visitor_mobile,
       license_plates: _p,

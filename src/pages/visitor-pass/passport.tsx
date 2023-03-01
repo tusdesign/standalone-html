@@ -10,7 +10,11 @@ import bgImage from '../../assets/visitor-pass-bg.png';
 
 export const Passport:FC = () => {
   const location = useLocation();
-  const { state: { name, to, token } } = location as { state: { to: string; name: string; token: string } };
+  const {
+    state: {
+      name, to, token, company, from,
+    },
+  } = location as { state: { to: string; name: string; token: string; from: string; company: string; } };
   const [qrcode, setQrCode] = useState<string>('');
   const imgContainer = createRef<HTMLDivElement>();
   useEffect(() => {
@@ -29,7 +33,7 @@ export const Passport:FC = () => {
         setFinalImageUrl(canvas.toDataURL());
       },
     );
-  }, [qrcode, imgContainer]);
+  }, [qrcode, imgContainer, finalImageUrl]);
 
   return (
     <>
@@ -41,12 +45,12 @@ export const Passport:FC = () => {
               style={{
                 width: '100%',
                 padding: 0,
-                borderRadius: '2rem',
+                borderRadius: '1.5rem',
                 overflow: 'hidden',
               }}
               bodyStyle={{
                 width: '100%',
-                backgroundColor: '#565e71',
+                backgroundColor: '#c0c5db',
                 backgroundImage: `url(${bgImage})`,
                 backgroundPosition: 'bottom right',
                 backgroundRepeat: 'no-repeat',
@@ -55,25 +59,32 @@ export const Passport:FC = () => {
                 flexDirection: 'column',
                 justifyContent: 'flex-start',
                 alignItems: 'center',
-                color: 'white',
-                fontSize: '0.6rem',
-                borderRadius: '2rem',
-                overflow: 'hidden',
+                color: 'black',
+                fontSize: '0.5rem',
+                fontWeight: '550',
               }}
             >
-              <div style={{ fontSize: '1.5rem' }}>访客证</div>
-              <div style={{ width: '75%', padding: '0.2rem 0' }}>姓名</div>
-              <div style={{ width: '75%', padding: '0.2rem 0' }}>{name}</div>
-              <div style={{ width: '75%', padding: '0.2rem 0' }}>有效时间</div>
-              <div style={{ width: '75%', padding: '0.2rem 0' }}>{dayjs(to).format('YYYY年MM月DD日 HH时mm分ss秒')}</div>
+              <div style={{ fontSize: '1.5rem', padding: '0.5rem 0 0 0' }}>访客证</div>
               <div style={{
-                width: '75%', minHeight: '70vw', padding: '1rem', backgroundColor: 'white', borderRadius: '1rem', marginTop: '1rem',
+                width: '100%', padding: '1rem 0 0.2rem 0', display: 'flex', justifyContent: 'center',
+              }}>{company}</div>
+              <div style={{
+                width: '100%', display: 'flex', justifyContent: 'center', fontSize: '1.5rem',
+              }}>{name}</div>
+              <div style={{
+                width: '65%', padding: '0.8rem', backgroundColor: 'white', borderRadius: '1rem', marginTop: '1rem',
               }}>
                 {
                   qrcode && (<img style={{ width: '100%' }} src={qrcode} alt="qr code" />)
                 }
               </div>
-              <div style={{ padding: '1rem 0' }}>启迪设计大厦</div>
+              <div style={{
+                width: '100%', padding: '1rem 0 0 0', display: 'flex', justifyContent: 'center',
+              }}>有效时间</div>
+              <div style={{
+                width: '100%', padding: '0.2rem 0 0 0', display: 'flex', justifyContent: 'center',
+              }}>{dayjs(from).format('YYYY/MM/DD/ HH:mm')} - {dayjs(to).format('HH:mm')}</div>
+              <div style={{ fontSize: '0.8rem', padding: '1rem 0' }}>启迪设计大厦</div>
             </Card>
           )
         }

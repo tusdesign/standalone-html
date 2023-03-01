@@ -22,8 +22,14 @@ export const Visitor = () => {
         },
       },
     ).then((res) => {
-      const { name, to, token } = res.data;
-      navigate('passport', { state: { name, to, token } });
+      const {
+        name, from, to, token, company,
+      } = res.data;
+      navigate('passport', {
+        state: {
+          name, from, to, token, company,
+        },
+      });
     });
   }, [params.id, cellphone]);
 

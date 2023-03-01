@@ -5,30 +5,32 @@ import {
 import { useLocation } from 'react-router-dom';
 import QrCode from 'qrcode';
 import html2canvas from 'html2canvas';
+import dayjs from 'dayjs';
 import bgImage from '../../assets/visitor-pass-bg.png';
 
 export const Passport:FC = () => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const location = useLocation();
-  // const { state: { cellphone } } = location;
+  const { state: { name, to, token } } = location as { state: { to: string; name: string; token: string } };
   const [qrcode, setQrCode] = useState<string>('');
   const imgContainer = createRef<HTMLDivElement>();
   useEffect(() => {
-    QrCode.toDataURL('this is a qrcode contain visitor info', { margin: 0, errorCorrectionLevel: 'H' }, (err, url) => {
+    QrCode.toDataURL(token, { margin: 0, errorCorrectionLevel: 'H' }, (err, url) => {
       setQrCode(url);
     });
-  }, []);
+  }, [token]);
+
   const [finalImageUrl, setFinalImageUrl] = useState<string>();
   useEffect(() => {
     if (!(qrcode && imgContainer.current)) {
       return;
     }
-    html2canvas(imgContainer.current).then(
+    html2canvas(imgContainer.current, { backgroundColor: null }).then(
       (canvas: HTMLCanvasElement) => {
         setFinalImageUrl(canvas.toDataURL());
       },
     );
   }, [qrcode, imgContainer]);
+
   return (
     <>
       <div ref={imgContainer} style={{ width: '100%' }}>
@@ -36,6 +38,12 @@ export const Passport:FC = () => {
         {
           !finalImageUrl && (
             <Card
+              style={{
+                width: '100%',
+                padding: 0,
+                borderRadius: '2rem',
+                overflow: 'hidden',
+              }}
               bodyStyle={{
                 width: '100%',
                 backgroundColor: '#565e71',
@@ -50,13 +58,14 @@ export const Passport:FC = () => {
                 color: 'white',
                 fontSize: '0.6rem',
                 borderRadius: '2rem',
+                overflow: 'hidden',
               }}
             >
               <div style={{ fontSize: '1.5rem' }}>访客证</div>
               <div style={{ width: '75%', padding: '0.2rem 0' }}>姓名</div>
-              <div style={{ width: '75%', padding: '0.2rem 0' }}>法外狂徒张三</div>
+              <div style={{ width: '75%', padding: '0.2rem 0' }}>{name}</div>
               <div style={{ width: '75%', padding: '0.2rem 0' }}>有效时间</div>
-              <div style={{ width: '75%', padding: '0.2rem 0' }}>2023/01/01 00:00~23:59</div>
+              <div style={{ width: '75%', padding: '0.2rem 0' }}>{dayjs(to).format('YYYY年MM月DD日 HH时mm分ss秒')}</div>
               <div style={{
                 width: '75%', minHeight: '70vw', padding: '1rem', backgroundColor: 'white', borderRadius: '1rem', marginTop: '1rem',
               }}>

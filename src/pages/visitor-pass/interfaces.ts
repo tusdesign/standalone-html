@@ -31,3 +31,19 @@ export type Visit = {
   visitors: Visitor[];
   visitor_id: number;
 };
+
+export type Passport = {
+  CreatedAt: string;
+  DeletedAt: string;
+  ID: number;
+  UpdatedAt: string;
+  company: string;
+  from: string;
+  mobile: string;
+  name: string;
+  pass_id: number;
+  to: string;
+  token: string;
+  visit_id: number;
+  visitor_id: string;
+};

@@ -33,7 +33,7 @@ export const Passport:FC = () => {
         setFinalImageUrl(canvas.toDataURL());
       },
     );
-  }, [qrcode, imgContainer, finalImageUrl]);
+  }, [qrcode]);
 
   return (
     <>

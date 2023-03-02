@@ -1,7 +1,9 @@
 import { useParams, useNavigate } from 'react-router-dom';
-import { Input, Button, Card } from 'antd-mobile';
+import {
+  Input, Button, Card, Toast,
+} from 'antd-mobile';
 import { useCallback, useEffect, useState } from 'react';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import dayjs from 'dayjs';
 import { Passport, Visit } from './interfaces';
 
@@ -14,36 +16,50 @@ export const Visitor = () => {
   }, []);
   const navigate = useNavigate();
   const generatePassport = useCallback(() => {
-    axios.get<Passport>(
-      `${process.env.REACT_APP_BASE_URL}/visits/${params.id}/pass/${cellphone}`,
+    axios
+      .get<Passport>(
+      `${process.env.REACT_APP_BASE_URL}/visits/${params.id}/pass/${cellphone?.trim()}`,
       {
         headers: {
           'X-API-KEY': process.env.X_API_KEY,
         },
       },
-    ).then((res) => {
-      const {
-        name, from, to, token, company,
-      } = res.data;
-      navigate('passport', {
-        state: {
+    )
+      .then((res) => {
+        const {
           name, from, to, token, company,
-        },
+        } = res.data;
+        navigate('passport', {
+          state: {
+            name, from, to, token, company,
+          },
+        });
+      })
+      .catch((err: AxiosError) => {
+        const errMap: Record<string, string> = {
+          404: '手机号无效, 请确认后重试',
+          9999: '位置错误',
+        };
+        Toast.show(errMap[(err.response?.status ?? 9999).toString()]);
       });
-    });
   }, [params.id, cellphone]);
 
   useEffect(() => {
-    axios.get<Visit>(
+    axios
+      .get<Visit>(
       `${process.env.REACT_APP_BASE_URL}/visits/${params.id}`,
       {
         headers: {
           'X-API-KEY': process.env.X_API_KEY,
         },
       },
-    ).then((res) => {
-      setVisit(res.data);
-    });
+    )
+      .then((res) => {
+        setVisit(res.data);
+      })
+      .catch(() => {
+        Toast.show('参数无效, 请确认后重试');
+      });
   }, [params.id]);
   return (
     <>
@@ -88,6 +104,8 @@ export const Visitor = () => {
           <Input style={{
             '--font-size': '0.8rem',
           }}
+          inputMode="tel"
+          maxLength={11}
           onChange={inputCellphone}
           placeholder='手机号' />
         </div>

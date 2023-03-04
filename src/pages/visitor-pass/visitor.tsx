@@ -15,7 +15,21 @@ export const Visitor = () => {
     setCellphone(value);
   }, []);
   const navigate = useNavigate();
+  const validate = useCallback(() => {
+    if (!cellphone) {
+      Toast.show('请输入手机号以生成访客证');
+      return false;
+    }
+    if (/^(?:(?:\+|00)86)?1[3-9]\d{9}$/.test(cellphone)) {
+      Toast.show('手机号无效,请确认后重试');
+      return false;
+    }
+    return true;
+  }, [cellphone]);
   const generatePassport = useCallback(() => {
+    if (!validate()) {
+      return;
+    }
     axios
       .get<Passport>(
       `${process.env.REACT_APP_BASE_URL}/visits/${params.id}/pass/${cellphone?.trim()}`,
@@ -37,7 +51,7 @@ export const Visitor = () => {
       })
       .catch((err: AxiosError) => {
         const errMap: Record<string, string> = {
-          404: '手机号无效, 请确认后重试',
+          404: '手机号无效,请确认后重试',
           9999: '位置错误',
         };
         Toast.show(errMap[(err.response?.status ?? 9999).toString()]);
@@ -111,18 +125,21 @@ export const Visitor = () => {
         </div>
         {/* confirm button */}
         <Button
-        onClick={generatePassport}
-        style={{
-          backgroundColor: '#315da8',
-          width: '100%',
-          padding: '1rem',
-          borderRadius: '0.8rem',
-          color: 'white',
-          display: 'flex',
-          justifyContent: 'flex-start',
-          alignItems: 'center',
-          fontSize: '0.8rem',
-        }}>提交</Button>
+          onClick={generatePassport}
+          style={{
+            backgroundColor: '#315da8',
+            width: '100%',
+            padding: '1rem',
+            borderRadius: '0.8rem',
+            color: 'white',
+            display: 'flex',
+            justifyContent: 'flex-start',
+            alignItems: 'center',
+            fontSize: '0.8rem',
+          }}
+        >
+          提交
+        </Button>
       </Card>
     </>
   );

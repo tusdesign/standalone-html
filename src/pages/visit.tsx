@@ -21,7 +21,7 @@ export const VisitPage: FC = () => {
       Toast.show('请输入手机号以生成访客证');
       return false;
     }
-    if (/^(?:(?:\+|00)86)?1[3-9]\d{9}$/.test(cellphone)) {
+    if (!/^(?:(?:\+|00)86)?1[3-9]\d{9}$/.test(cellphone)) {
       Toast.show('手机号无效,请确认后重试');
       return false;
     }

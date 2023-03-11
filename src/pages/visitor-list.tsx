@@ -50,6 +50,14 @@ export const VisitorListPage: FC = () => {
   const removeCreatedVisitor = useCallback((id: string) => {
     setVisitorList((prev) => [...(prev.filter((_v) => _v.id !== id))]);
   }, []);
+
+  const checkDuplicatePhoneNumber = (_: any, mobile: string) => {
+    if (visitorList.some((visitor: Visitor) => visitor.mobile === mobile)) {
+      return Promise.reject(Error('手机号已存在, 请勿重复添加'));
+    }
+    return Promise.resolve();
+  };
+
   const nav = useNavigate();
   const confirm = useCallback(() => {
     if (update) {
@@ -71,7 +79,9 @@ export const VisitorListPage: FC = () => {
       {
         visitorList.map((_v) => (
           _v.state === State.EDITING
-            ? <NewVisitor onConfirm={confirmNewVisitor} onCancel={removeNewVisitor} key={_v.id}/> : <VisitorCard onDelete={removeCreatedVisitor} visitor={_v} key={_v.id} />
+            ? <NewVisitor onConfirm={confirmNewVisitor}
+              onCancel={removeNewVisitor}
+              key={_v.id} mobileValidator={checkDuplicatePhoneNumber} /> : <VisitorCard onDelete={removeCreatedVisitor} visitor={_v} key={_v.id} />
         ))
       }
       <Button style={{

@@ -8,7 +8,7 @@ import html2canvas from 'html2canvas';
 import dayjs from 'dayjs';
 import bgImage from '../assets/visitor-pass-bg.png';
 
-export const Passport:FC = () => {
+export const Passport: FC = () => {
   const location = useLocation();
   const {
     state: {
@@ -66,10 +66,10 @@ export const Passport:FC = () => {
             >
               <div style={{ fontSize: '1.5rem', padding: '0.5rem 0 0 0' }}>访客证</div>
               <div style={{
-                width: '100%', padding: '1rem 0 0.2rem 0', display: 'flex', justifyContent: 'center',
+                width: '100%', padding: '1rem 0 0.2rem 0', display: 'inline-block', textAlign: 'center', wordWrap: 'break-word',
               }}>{company}</div>
               <div style={{
-                width: '100%', display: 'flex', justifyContent: 'center', fontSize: '1.5rem',
+                width: '100%', display: 'inline-block', fontSize: '1.5rem', textAlign: 'center', wordWrap: 'break-word',
               }}>{name}</div>
               <div style={{
                 width: '65%', padding: '0.8rem', backgroundColor: 'white', borderRadius: '1rem', marginTop: '1rem',

@@ -36,7 +36,7 @@ const router = createBrowserRouter([
     element: <VisitorAppointment />,
   },
   {
-    path: 'visitor/list',
+    path: 'visitor/appointment/list',
     element: <VisitorAppointment />,
   },
   {

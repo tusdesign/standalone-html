@@ -10,6 +10,7 @@ import { VisitPage } from './pages/visit';
 import { Passport } from './pages/passport';
 import { PassportLayout } from './layout/passport-layout';
 import { AppointmentProvider } from './context/appointment-context';
+import { VisitorListPage } from './pages/visitor-list';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
@@ -37,7 +38,7 @@ const router = createBrowserRouter([
   },
   {
     path: 'visitor/appointment/list',
-    element: <VisitorAppointment />,
+    element: <VisitorListPage />,
   },
   {
     path: 'notification',

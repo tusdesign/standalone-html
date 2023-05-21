@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import {
-  RouterProvider, createBrowserRouter,
+  RouterProvider, createBrowserRouter, createHashRouter,
 } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
 import { VisitorAppointment } from './pages/visitor-appointment';
@@ -16,7 +16,7 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 );
 
-const router = createBrowserRouter([
+const routes = [
   {
     path: 'visitor',
     element: <PassportLayout />,
@@ -65,7 +65,12 @@ const router = createBrowserRouter([
   //       <Route path=':id/passport' element={<Passport/>}></Route>
   //     </Route>
   //   </Route>
-]);
+];
+
+// HASH_ROUTER should only be true for github pages deployment as for now
+// for other host solution, need check if non-hash router is supported.
+// refer https://github.com/volodalexey/test_swapi_ant
+const router = process.env.REACT_APP_HASH_ROUTER === 'true' ? createHashRouter(routes) : createBrowserRouter(routes);
 
 root.render(
   <React.StrictMode>

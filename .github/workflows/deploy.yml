@@ -18,6 +18,8 @@ jobs:
         run: |
           yarn
           yarn build
+        env:
+          REACT_APP_HASH_ROUTER: true
       -
         name: Deploy to GitHub Pages
         if: success()
@@ -27,3 +29,4 @@ jobs:
           build_dir: build
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+

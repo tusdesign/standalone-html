@@ -14,9 +14,9 @@ fi
 
 echo ${REACT_APP_BASE_URL}
 
-docker build . \
+docker build  \
 	-t $TAG \
-    --build-arg REACT_APP_BASE_URL=${REACT_APP_BASE_URL} 
+    --build-arg REACT_APP_BASE_URL=${REACT_APP_BASE_URL} .
 
 docker login oci.tuxm.art:8443 --username ${HARBOR_USER} --password ${HARBOR_PASS} -e
 docker push $TAG

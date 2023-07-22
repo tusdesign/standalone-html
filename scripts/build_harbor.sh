@@ -7,16 +7,16 @@ export TAG=oci.tuxm.art:8443/tusdesign/html:${VERSION}
 
 REACT_APP_BASE_URL='https://api-${VERSION}.sz9wang.com/api/v1/public'
 
-if [[ ${VERSION} == "prod" ]]
+if [ ${VERSION} == "prod" ]
 then 
     REACT_APP_BASE_URL='https://api.sz9wang.com/api/v1/public'
 fi
 
 echo ${REACT_APP_BASE_URL}
 
-docker build \
+docker build . \
 	-t $TAG \
-    --build-arg REACT_APP_BASE_URL=${REACT_APP_BASE_URL} \ 
+    --build-arg REACT_APP_BASE_URL=${REACT_APP_BASE_URL} 
 
 docker login oci.tuxm.art:8443 --username ${HARBOR_USER} --password ${HARBOR_PASS} -e
 docker push $TAG

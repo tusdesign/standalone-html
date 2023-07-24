@@ -3,7 +3,7 @@ export BUILD_TIME=$(date +'%Y-%m-%dT%H:%M:%S%z')
 
 
 export DOCKER_DEFAULT_PLATFORM=linux/amd64
-export TAG=oci.tuxm.art:8443/tusdesign/html:${VERSION}
+export TAG=oci.tuxm.art:8443/tusdesign/html:${TARGET_DEPLOYMENT}
 
 REACT_APP_BASE_URL="https://api-$TARGET_DEPLOYMENT.sz9wang.com/api/v1/public"
 

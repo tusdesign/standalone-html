@@ -28,7 +28,7 @@ jobs:
       with:
         persist-credentials: false
     - name: Run build and push docker to harbor
-      run: sh ./scripts/build_harbor.sh ${{ env.TARGET_DEPLOYMENT }}
+      run: sh ./scripts/build_harbor.sh
       env:
         COMMIT_SHA: ${{ github.sha }}
         HARBOR_USER: ${{ secrets.HARBOR_USER }}

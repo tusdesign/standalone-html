@@ -7,8 +7,7 @@ export TAG=oci.tuxm.art:8443/tusdesign/html:${VERSION}
 
 REACT_APP_BASE_URL='https://api-${VERSION}.sz9wang.com/api/v1/public'
 
-if [ ${VERSION} == "prod" ]
-then 
+if [ "$VERSION" == "prod" ]; then
     REACT_APP_BASE_URL='https://api.sz9wang.com/api/v1/public'
 fi
 

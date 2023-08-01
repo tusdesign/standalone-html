@@ -20,6 +20,7 @@ export const PassportLayout = () => (
       bodyStyle={{
         width: '100%', boxSizing: 'border-box', backgroundColor: '#edeef8', borderRadius: '0.5rem',
       }}
+      onClick={() => window.open('https://ditu.amap.com/search?query=%E5%90%AF%E8%BF%AA%E8%AE%BE%E8%AE%A1%E5%A4%A7%E5%8E%A6&city=320500&geoobj=120.664455%7C31.265526%7C120.819969%7C31.388767&zoom=13.03')}
     >
         <div style={{ paddingLeft: '1rem', paddingBottom: '0.5rem' }}>地址</div>
         <div style={{ width: '100%' }}>

@@ -1,6 +1,5 @@
 import { Outlet } from 'react-router-dom';
 import { Card } from 'antd-mobile';
-import mapImg from '../assets/map.png';
 
 export const PassportLayout = () => (
   <div style={{
@@ -24,7 +23,7 @@ export const PassportLayout = () => (
     >
         <div style={{ paddingLeft: '1rem', paddingBottom: '0.5rem' }}>地址</div>
         <div style={{ width: '100%' }}>
-          <img style={{ width: '100%' }} src={mapImg} alt="" />
+          <img style={{ width: '100%' }} src="/assets/map.png" alt="" />
         </div>
         <div style={{
           paddingTop: '0.3rem', paddingBottom: '0.2rem', display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: '0.5rem',

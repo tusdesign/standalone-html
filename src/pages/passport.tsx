@@ -1,12 +1,15 @@
 import { Card } from 'antd-mobile';
-import {
-  FC, useState, useEffect, createRef,
-} from 'react';
-import { useLocation } from 'react-router-dom';
-import QrCode from 'qrcode';
-import html2canvas from 'html2canvas';
 import dayjs from 'dayjs';
-import bgImage from '../assets/visitor-pass-bg.png';
+import html2canvas from 'html2canvas';
+import QrCode from 'qrcode';
+import {
+  FC,
+  createRef,
+  useEffect,
+  useState,
+} from 'react';
+
+import { useLocation } from 'react-router-dom';
 
 export const Passport: FC = () => {
   const location = useLocation();
@@ -51,7 +54,7 @@ export const Passport: FC = () => {
               bodyStyle={{
                 width: '100%',
                 backgroundColor: '#c0c5db',
-                backgroundImage: `url(${bgImage})`,
+                backgroundImage: 'url(/assets/visitor-pass-bg.png)',
                 backgroundPosition: 'bottom right',
                 backgroundRepeat: 'no-repeat',
                 backgroundSize: '85%',

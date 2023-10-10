@@ -21,7 +21,7 @@ export const Passport: FC = () => {
   const [qrcode, setQrCode] = useState<string>('');
   const imgContainer = createRef<HTMLDivElement>();
   useEffect(() => {
-    QrCode.toDataURL(token, { margin: 0, errorCorrectionLevel: 'H' }, (err, url) => {
+    QrCode.toDataURL(token, { margin: 0, errorCorrectionLevel: 'H' }, (_, url) => {
       setQrCode(url);
     });
   }, [token]);

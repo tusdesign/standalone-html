@@ -3,7 +3,7 @@ import {
 } from 'antd-mobile';
 import { EditSOutline, DeleteOutline, CheckOutline } from 'antd-mobile-icons';
 import { PickerValue } from 'antd-mobile/es/components/picker-view';
-import React, {
+import {
   FC, useCallback, useState,
 } from 'react';
 

@@ -95,7 +95,7 @@ export function VisitorAppointment() {
       startTime, duration, visitors, company, visitee, visitee_mobile, plates: _p = [],
     } = values;
     setIsLoading(true);
-    axios.post(`${process.env.REACT_APP_BASE_URL}/visits`, {
+    axios.post(`${import.meta.env.VITE_BASE_URL}/visits`, {
       visitors,
       company,
       license_plates: _p,
@@ -183,7 +183,7 @@ export function VisitorAppointment() {
           trigger='onConfirm'
           rules={[{ required: true }]}
           onClick={
-            (e, datePickerRef: RefObject<DatePickerRef>) => {
+            (_, datePickerRef: RefObject<DatePickerRef>) => {
               datePickerRef.current?.open();
             }
           }
@@ -211,7 +211,7 @@ export function VisitorAppointment() {
           trigger='onConfirm'
           rules={[{ required: true }]}
           onClick={
-            (e, pickerRef: RefObject<PickerRef>) => {
+            (_, pickerRef: RefObject<PickerRef>) => {
               pickerRef.current?.open();
             }
           }

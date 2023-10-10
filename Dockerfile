@@ -9,10 +9,7 @@ ARG REACT_APP_BASE_URL
 COPY . .
 RUN yarn build
 
-FROM nginx:alpine
-COPY ./nginx.conf /etc/nginx/nginx.conf
-RUN rm -rf /usr/share/nginx/html/*
-COPY --from=builder /app/build /usr/share/nginx/html
+FROM registry.sz9wang.com/public/bun_static:latest
+COPY --from=builder /app/build /www
 
-
-ENTRYPOINT ["nginx", "-g", "daemon off;"]
+ENTRYPOINT ["bun", "/app/server.js"]

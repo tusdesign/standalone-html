@@ -20,6 +20,7 @@ jobs:
           yarn build
         env:
           REACT_APP_HASH_ROUTER: true
+          REACT_APP_BASE_URL: ${{ vars.API_HOST_STAGING }}
       -
         name: Deploy to GitHub Pages
         if: success()

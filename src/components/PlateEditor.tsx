@@ -1,7 +1,7 @@
 import {
   Button, Card, Popup, Space,
 } from 'antd-mobile';
-import React, { FC, useCallback, useState } from 'react';
+import { FC, useCallback, useState } from 'react';
 import { nanoid } from 'nanoid';
 import {
   LicensePlate, LicensePlateItem, LicensePlateProps, MODE, REGION_OPTIONS,

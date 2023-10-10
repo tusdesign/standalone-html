@@ -17,8 +17,6 @@ on:
           - "staging"
           - "prod"
 
-env:
-  TARGET_DEPLOYMENT: '${{ github.event.inputs.target_deployment }}'
 jobs:
   build:
     runs-on: [ubuntu-latest]
@@ -33,3 +31,4 @@ jobs:
         COMMIT_SHA: ${{ github.sha }}
         HARBOR_USER: ${{ secrets.HARBOR_USER }}
         HARBOR_PASS: ${{ secrets.HARBOR_PASS }}
+        TARGET_DEPLOYMENT: '${{ github.event.inputs.target_deployment }}'

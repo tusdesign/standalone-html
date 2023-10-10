@@ -33,10 +33,10 @@ export const VisitPage: FC = () => {
     }
     axios
       .get<Passport>(
-      `${process.env.REACT_APP_BASE_URL}/visits/${params.id}/pass/${cellphone?.trim()}`,
+      `${import.meta.env.VITE_BASE_URL}/visits/${params.id}/pass/${cellphone?.trim()}`,
       {
         headers: {
-          'X-API-KEY': process.env.X_API_KEY,
+          'X-API-KEY': import.meta.env.X_API_KEY,
         },
       },
     )
@@ -62,10 +62,10 @@ export const VisitPage: FC = () => {
   useEffect(() => {
     axios
       .get<Visit>(
-      `${process.env.REACT_APP_BASE_URL}/visits/${params.id}`,
+      `${import.meta.env.VITE_BASE_URL}/visits/${params.id}`,
       {
         headers: {
-          'X-API-KEY': process.env.X_API_KEY,
+          'X-API-KEY': import.meta.env.X_API_KEY,
         },
       },
     )

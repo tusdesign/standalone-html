@@ -101,6 +101,7 @@ export const Passport: FC = () => {
                 padding: '1rem 0 0 0',
                 display: 'flex',
                 justifyContent: 'center',
+                fontSize: '1rem',
               }}
             >
               有效时间
@@ -111,6 +112,7 @@ export const Passport: FC = () => {
                 padding: '0.2rem 0 0 0',
                 display: 'flex',
                 justifyContent: 'center',
+                fontSize: '1rem',
               }}
             >
               {dayjs(from).format('YYYY/MM/DD/ HH:mm')} - {dayjs(to).format('HH:mm')}

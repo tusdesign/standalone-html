@@ -131,8 +131,8 @@ export const Passport: FC = () => {
         }}
       >
         <div style={{ paddingBottom: '0.8rem', fontSize: '1rem' }}>长按访客证以保存至相册</div>
-        <div style={{ fontSize: '0.8rem' }}>请即使保存您的访客证, 以便在访问时快捷出示.</div>
-        <div style={{ fontSize: '0.8rem' }}>如果不慎遗失,可以返回此页面再次保存.</div>
+        <div style={{ fontSize: '1rem' }}>请及时保存您的访客证, 以便在访问时快捷出示。</div>
+        <div style={{ fontSize: '1rem' }}>如果不慎遗失,可以返回此页面再次保存。</div>
       </div>
     </>
   );

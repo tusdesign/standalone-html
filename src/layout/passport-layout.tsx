@@ -43,14 +43,17 @@ export const PassportLayout = () => (
       <div
         style={{
           paddingTop: '0.3rem',
-          paddingBottom: '0.2rem',
+          paddingBottom: '0.3rem',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          fontSize: '0.5rem',
+          fontSize: '1rem',
+          textAlign: 'center',
         }}
       >
-        江苏省苏州市工业园区旺墩路北, 南施街东
+        江苏省苏州市工业园区旺茂街9号
+        <br />
+        点击地图以获取路线引导
       </div>
     </Card>
     <div style={{ paddingTop: '1rem' }}>©2023 启迪设计集团股份有限公司 版权所有</div>

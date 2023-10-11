@@ -10,6 +10,6 @@ COPY . .
 RUN yarn build
 
 FROM registry.sz9wang.com/public/bun_static:latest
-COPY --from=builder /app/build /www
+COPY --from=builder /app/dist /www
 
 ENTRYPOINT ["bun", "/app/server.js"]

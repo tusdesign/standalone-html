@@ -1,3 +1,3 @@
 export function NotificationPublishPage() {
-  return (<div>publish</div>);
+  return <div>publish</div>;
 }

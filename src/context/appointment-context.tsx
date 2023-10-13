@@ -1,6 +1,4 @@
 import { createContext, FC, PropsWithChildren, useCallback, useState } from 'react';
-import dayjs from 'dayjs';
-import { useMinTime } from '../hooks/visitorHooks';
 
 export interface RequestData {
   visitors: Visitor[];
@@ -12,11 +10,11 @@ export interface RequestData {
   plates: string[];
 }
 
-const defaultData = {
+const defaultData: RequestData = {
   company: '',
   duration: ['4'],
   plates: [],
-  startTime: dayjs().toDate(),
+  startTime: new Date(),
   visitee: '',
   visitee_mobile: '',
   visitors: [],
@@ -31,8 +29,7 @@ export const AppointmentContext = createContext<{
 });
 
 export const AppointmentProvider: FC<PropsWithChildren> = ({ children }) => {
-  const minTime = useMinTime();
-  const [data, setData] = useState<RequestData>({ ...defaultData, startTime: minTime });
+  const [data, setData] = useState<RequestData>({ ...defaultData });
   const update = useCallback((newVal: RequestData) => {
     setData(newVal);
   }, []);

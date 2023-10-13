@@ -18,7 +18,6 @@ import { LicensePlateItem } from '../components/Plate';
 import PlateEditor from '../components/PlateEditor';
 import { VisitorChip } from '../components/visitor-chip';
 import { AppointmentContext, RequestData } from '../context/appointment-context';
-import { useMinTime } from '../hooks/visitorHooks';
 import { ERROR_MAP } from '../lib/error';
 
 const DURATION_OPTIONS = [
@@ -68,7 +67,7 @@ export function VisitorAppointment() {
     () => dayjs().startOf('day').add(21, 'hour').diff(dayjs().startOf('day'), 'minute'),
     [],
   );
-  const minTime = useMinTime();
+  // const minTime = useMinTime();
   const [form] = Form.useForm<RequestData>();
   useEffect(() => {
     form.setFieldsValue(visitData);
@@ -185,12 +184,7 @@ export function VisitorAppointment() {
         }
       >
         <Form.Header>访客信息</Form.Header>
-        <Form.Item
-          disabled={isLoading}
-          label="来访者公司"
-          name="company"
-          rules={[{ required: true }]}
-        >
+        <Form.Item disabled={isLoading} label="来访者公司" name="company">
           <Input autoComplete="new-password" placeholder="请输入" />
         </Form.Item>
         <Form.Item disabled={isLoading} label="来访车牌号" name="plates">
@@ -237,10 +231,10 @@ export function VisitorAppointment() {
           }}
         >
           <DatePicker
-            min={minTime}
+            min={new Date()}
             filter={{
               hour: (val) => val <= 20 && val >= 8,
-              minute: (val) => val === 0 || val === 30,
+              // minute: (val) => val === 0 || val === 30,
             }}
             precision="minute"
             onConfirm={(val) => {

@@ -13,7 +13,7 @@ RUN yarn build
 FROM node:18-alpine AS final
 WORKDIR /app
 
-COPY --from=builder /app/dist /app
+COPY --from=builder /app/dist ./
 RUN npm install -g serve
 
 EXPOSE 3000

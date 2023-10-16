@@ -2,7 +2,7 @@ export TZ=Asia/Shanghai
 export BUILD_TIME=$(date +'%Y-%m-%dT%H:%M:%S%z')
 
 export DOCKER_DEFAULT_PLATFORM=linux/amd64
-export TAG=oci.tuxm.art:8443/tusdesign/html:${TARGET_DEPLOYMENT}
+export TAG=registry.sz9wang.com/tusdesign/html:${TARGET_DEPLOYMENT}
 
 REACT_APP_BASE_URL="https://api-$TARGET_DEPLOYMENT.sz9wang.com/api/v1/public"
 VITE_BASE_URL="https://api-$TARGET_DEPLOYMENT.sz9wang.com/api/v1/public"
@@ -21,6 +21,6 @@ docker build \
   --build-arg VITE_BASE_URL=${VITE_BASE_URL} \
   .
 
-docker login oci.tuxm.art:8443 --username ${HARBOR_USER} --password ${HARBOR_PASS}
+docker registry.sz9wang.com --username ${HARBOR_USER} --password ${HARBOR_PASS}
 docker push $TAG
 docker image rm $TAG

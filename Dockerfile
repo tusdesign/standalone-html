@@ -9,10 +9,13 @@ ARG REACT_APP_BASE_URL
 COPY . .
 RUN yarn build
 
-FROM nginx:alpine
-COPY ./nginx.conf /etc/nginx/nginx.conf
-RUN rm -rf /usr/share/nginx/html/*
-COPY --from=builder /app/dist /usr/share/nginx/html
 
+FROM node:18-alpine AS final
+WORKDIR /app
 
-ENTRYPOINT ["nginx", "-g", "daemon off;"]
+COPY --from=builder /app/dist/ /app
+RUN npm install -g serve
+
+EXPOSE 3000
+
+CMD [ "serve", "-s", "/app" , "-l", "3000" ]

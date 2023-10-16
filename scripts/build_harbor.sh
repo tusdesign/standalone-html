@@ -21,6 +21,6 @@ docker build \
   --build-arg VITE_BASE_URL=${VITE_BASE_URL} \
   .
 
-docker registry.sz9wang.com --username ${HARBOR_USER} --password ${HARBOR_PASS}
+docker login registry.sz9wang.com --username ${HARBOR_USER} --password ${HARBOR_PASS}
 docker push $TAG
 docker image rm $TAG

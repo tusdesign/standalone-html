@@ -11,7 +11,7 @@ import {
 } from 'antd-mobile';
 import axios, { AxiosError } from 'axios';
 import dayjs from 'dayjs';
-import { filter } from 'lodash';
+import { filter, isString } from 'lodash';
 import { FC, RefObject, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { LicensePlateItem } from '../components/Plate';
@@ -132,12 +132,17 @@ export function VisitorAppointment() {
       })
       .catch((err: AxiosError) => {
         const { response } = err;
-        const {
-          data: { code, message },
-        } = response as { data: { code: number; message: string } };
-        Dialog.alert({
-          content: ERROR_MAP[String(code)] || message || 'Unknown error',
-        });
+        const { data } = response as { data: string | { code: number; message: string } };
+        if (isString(data)) {
+          Dialog.alert({
+            content: data,
+          });
+        } else {
+          const { code, message } = data;
+          Dialog.alert({
+            content: ERROR_MAP[String(code)] || message || 'Unknown error',
+          });
+        }
       })
       .finally(() => {
         setIsLoading(false);

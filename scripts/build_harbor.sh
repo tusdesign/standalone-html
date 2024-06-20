@@ -8,13 +8,14 @@ REACT_APP_BASE_URL="https://api-$TARGET_DEPLOYMENT.sz9wang.com/api/v1/public"
 VITE_BASE_URL="https://api-$TARGET_DEPLOYMENT.sz9wang.com/api/v1/public"
 
 if [ "$TARGET_DEPLOYMENT" = "prod" ]; then
-  REACT_APP_BASE_URL='https://api.sz9wang.com/api/v1/public'
-  VITE_BASE_URL='https://api.sz9wang.com/api/v1/public'
+  REACT_APP_BASE_URL="https://api.sz9wang.com/api/v1/public"
+  VITE_BASE_URL="https://api.sz9wang.com/api/v1/public"
 fi
 
 # for testing the k8s env
 if [ "$TARGET_DEPLOYMENT" = "dev" ]; then
-    REACT_APP_BASE_URL='https://api.k8.sz9wang.com/api/v1/public'
+    REACT_APP_BASE_URL="https://api.k8.sz9wang.com/api/v1/public"
+    VITE_BASE_URL="https://api.k8.sz9wang.com/api/v1/public"
 fi
 
 echo ${REACT_APP_BASE_URL}

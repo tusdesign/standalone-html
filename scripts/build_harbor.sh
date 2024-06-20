@@ -12,6 +12,11 @@ if [ "$TARGET_DEPLOYMENT" = "prod" ]; then
   VITE_BASE_URL='https://api.sz9wang.com/api/v1/public'
 fi
 
+# for testing the k8s env
+if [ "$TARGET_DEPLOYMENT" = "dev" ]; then
+    REACT_APP_BASE_URL='https://api.k8.sz9wang.com/api/v1/public'
+fi
+
 echo ${REACT_APP_BASE_URL}
 echo ${VITE_BASE_URL}
 

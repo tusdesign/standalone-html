@@ -1,6 +1,7 @@
 declare interface Visitor {
   mobile: string;
   name: string;
+  idCard: string;
   expire?: string;
   pass_id?: number;
   company?: string;

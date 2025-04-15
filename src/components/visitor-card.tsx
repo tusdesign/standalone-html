@@ -1,11 +1,13 @@
 import { Card, List } from 'antd-mobile';
 import { FC } from 'react';
+import { VisitorListItem } from '../pages/visitor-list';
 
 export const VisitorCard: FC<{
-  visitor: { id: string; name: string; mobile: string };
+  visitor: VisitorListItem;
   onDelete: (id: string) => void;
 }> = ({ visitor, onDelete }) => {
-  const { name, mobile } = visitor;
+  const { name, mobile, idCard } = visitor;
+
   return (
     <Card
       style={{
@@ -30,6 +32,9 @@ export const VisitorCard: FC<{
         </List.Item>
         <List.Item style={{ backgroundColor: '#e1e2ec' }} prefix="手机号">
           {mobile}
+        </List.Item>
+        <List.Item style={{ backgroundColor: '#e1e2ec' }} prefix="身份证号">
+          {idCard}
         </List.Item>
         <List.Item
           onClick={() => onDelete(visitor.id)}

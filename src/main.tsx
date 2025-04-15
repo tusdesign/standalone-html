@@ -14,33 +14,64 @@ import { Passport } from './pages/passport';
 import { PassportLayout } from './layout/passport-layout';
 import { AppointmentProvider } from './context/appointment-context';
 import { VisitorListPage } from './pages/visitor-list';
+import ProtectedRoute from './protectedRoute';
+import { AuthProvider } from './AuthContext';
+import Login from './login';
 
 const routes: RouteObject[] = [
   {
+    path: '/login',
+    element: <Login />,
+  },
+  {
     path: 'visitor',
-    element: <PassportLayout />,
+    element: (
+      <ProtectedRoute>
+        <PassportLayout />,
+      </ProtectedRoute>
+    ),
     children: [
       {
         path: ':id',
-        element: <VisitPage />,
+        element: (
+          <ProtectedRoute>
+            <VisitPage />,
+          </ProtectedRoute>
+        ),
       },
       {
         path: ':id/passport',
-        element: <Passport />,
+        element: (
+          <ProtectedRoute>
+            <Passport />,
+          </ProtectedRoute>
+        ),
       },
     ],
   },
   {
     path: 'visitor/appointment',
-    element: <VisitorAppointment />,
+    element: (
+      <ProtectedRoute>
+        <VisitorAppointment />,
+      </ProtectedRoute>
+    ),
   },
   {
     path: 'visitor/appointment/list',
-    element: <VisitorListPage />,
+    element: (
+      <ProtectedRoute>
+        <VisitorListPage />,
+      </ProtectedRoute>
+    ),
   },
   {
     path: 'notification',
-    element: <NotificationPublishPage />,
+    element: (
+      <ProtectedRoute>
+        <NotificationPublishPage />
+      </ProtectedRoute>
+    ),
     children: [
       {
         path: 'publisher',
@@ -78,9 +109,11 @@ const root = ReactDOM.createRoot(container);
 
 root.render(
   <React.StrictMode>
-    <AppointmentProvider>
-      <RouterProvider router={router} />
-    </AppointmentProvider>
+    <AuthProvider>
+      <AppointmentProvider>
+        <RouterProvider router={router} />
+      </AppointmentProvider>
+    </AuthProvider>
   </React.StrictMode>,
 );
 
